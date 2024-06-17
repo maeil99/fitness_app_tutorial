@@ -19,6 +19,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     try {
       emit(LoadingInitialSetup());
 
+      // Add a 5-second delay
+      await Future.delayed(const Duration(seconds: 5));
+
       final cateList = CategoryModel.getCategories();
       final List<PopularDietsModel> popularDiets =
           PopularDietsModel.getPopularDiets();

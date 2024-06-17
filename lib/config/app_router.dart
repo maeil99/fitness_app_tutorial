@@ -1,4 +1,5 @@
 import 'package:fitness_app_tutorial/screen/auth/view/login_screen.dart';
+import 'package:fitness_app_tutorial/screen/auth/view/sign_up_screen.dart';
 import 'package:fitness_app_tutorial/screen/home/view/home.dart';
 import 'package:fitness_app_tutorial/utils/constant/path_route.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,8 @@ class AppRouter {
         return _generatePageRoute(settings, (_) => const Home());
       case PathRoute.loginScreen:
         return _generatePageRoute(settings, (_) => const LoginScreen());
+      case PathRoute.signUpScreen:
+        return _generatePageRoute(settings, (_) => const SignUpScreen());
       default:
         return _generatePageRoute(
           settings,

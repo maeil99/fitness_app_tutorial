@@ -9,15 +9,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   final formKey = GlobalKey<FormState>();
+  final TextEditingController nameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
 
@@ -31,6 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void dispose() {
+    nameController.dispose();
     passwordController.dispose();
     emailController.dispose();
     super.dispose();
@@ -63,13 +65,15 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    "Sign In",
+                    "Sign Up",
                     style: TextStyle(
                       fontSize: 50,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const Gap(30),
+                  AuthField(controller: nameController, hintText: "Name"),
+                  const Gap(15),
                   AuthField(controller: emailController, hintText: "Email"),
                   const Gap(15),
                   AuthField(
@@ -79,10 +83,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const Gap(20),
                   AuthGradientButton(
-                    title: "Sign In",
+                    title: "Sign Up",
                     onPressed: () async {
                       if (formKey.currentState!.validate()) {
-                        _authBloc.add(AuthLogin(
+                        _authBloc.add(AuthSignUp(
+                          name: nameController.text.trim(),
                           email: emailController.text.trim(),
                           password: passwordController.text.trim(),
                         ));
@@ -92,16 +97,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   const Gap(20),
                   GestureDetector(
                     onTap: () async {
-                      await Navigator.pushNamed(
-                          context, PathRoute.signUpScreen);
+                      await Navigator.pushNamed(context, PathRoute.loginScreen);
                     },
                     child: RichText(
                       text: TextSpan(
-                        text: "Don't have an account? ",
+                        text: "Already have an account? ",
                         style: Theme.of(context).textTheme.titleMedium,
                         children: [
                           TextSpan(
-                            text: "Sign Up",
+                            text: "Sign In",
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium

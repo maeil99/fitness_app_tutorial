@@ -1,5 +1,6 @@
 import 'package:fitness_app_tutorial/config/app_router.dart';
 import 'package:fitness_app_tutorial/screen/home/view/home.dart';
+import 'package:fitness_app_tutorial/service/database/local_database_helper.dart';
 import 'package:fitness_app_tutorial/utils/simple_bloc_delegate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +9,7 @@ final navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await LocalDatabaseHelper().initDatabase();
   Bloc.observer = SimpleBlocDelegate();
 
   runApp(const MyApp());
