@@ -1,7 +1,12 @@
 import 'package:fitness_app_tutorial/screen/home/view/home.dart';
+import 'package:fitness_app_tutorial/utils/simple_bloc_delegate.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Bloc.observer = SimpleBlocDelegate();
+
   runApp(const MyApp());
 }
 
