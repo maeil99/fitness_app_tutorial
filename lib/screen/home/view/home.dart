@@ -3,12 +3,14 @@ import 'package:fitness_app_tutorial/screen/home/model/breakfast_model.dart';
 import 'package:fitness_app_tutorial/screen/home/model/category_model.dart';
 import 'package:fitness_app_tutorial/screen/home/model/diet_model.dart';
 import 'package:fitness_app_tutorial/screen/home/model/popular_model.dart';
+import 'package:fitness_app_tutorial/utils/constant/path_route.dart';
 import 'package:fitness_app_tutorial/utils/widget/loader.dart';
 import 'package:fitness_app_tutorial/utils/widget/show_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:logger/web.dart';
 
 part '../home_helper.dart';
 
@@ -37,8 +39,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     _homeBloc = HomeBloc()..add(InitialSetup());
-    displayedBreakfast = breakfastList;
-    // displayedCategories = categories;
+
     super.initState();
   }
 
@@ -51,7 +52,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appbar(),
+      appBar: appbar(context),
       backgroundColor: Colors.white,
       body: BlocConsumer<HomeBloc, HomeState>(
         bloc: _homeBloc,
